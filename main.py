@@ -1,5 +1,5 @@
 from hmm_model import SimpleModel, HMM
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image
 import sys
 
 width = 14

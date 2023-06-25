@@ -16,6 +16,7 @@ class SimpleModel():
 
         # Exist states in our HHM
         self.states = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789(),.-!?\"' "
+        #"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789(),.-!?\"' "
 
     @staticmethod
     def convert(matrix):
@@ -25,9 +26,11 @@ class SimpleModel():
             converted_matrix.append(converted_row)
         return converted_matrix
 
+
     @staticmethod
     def flatten_to_1D(matrix):
         return list(chain.from_iterable(matrix))
+
 
     @staticmethod
     def union_and_intersection(train, test):
@@ -38,6 +41,7 @@ class SimpleModel():
             intersection += train[i] and test[i]
         return union, intersection
 
+
     def probability(self, training_matrix, test_matrix):
         train = self.flatten_to_1D(self.convert(training_matrix))
         test = self.flatten_to_1D(self.convert(test_matrix))
@@ -45,6 +49,7 @@ class SimpleModel():
         noisy_pixels = union - intersection
         diff = (noisy_pixels + 1) / (height * width)
         return (1-diff)
+
 
     def probability_2(self, training_matrix, test_matrix):
         # Intersection over Union (IoU)
@@ -54,16 +59,18 @@ class SimpleModel():
         probability = ((intersection + 1) / (union + 1))
         return probability
 
+
     def probability_3(self, training_matrix, test_matrix):
-        # Reference: 
+        # Using Jaccard coefficient to calculate the score 
         train = self.flatten_to_1D(self.convert(training_matrix))
         test = self.flatten_to_1D(self.convert(test_matrix))
-        union, intersection = self.union_and_intersection(train, test)
+        _, intersection = self.union_and_intersection(train, test)
         sum_of_train = sum(train)
         sum_of_test = sum(test)
         #score = (intersection + 1) / (max(sum_of_train, sum_of_test) + 1)
-        score = (intersection + 1) / (sum_of_train+ sum_of_test - intersection + 1)
+        score = (intersection + 1) / (sum_of_train + sum_of_test - intersection + 1)
         return score
+
 
     def pixel_wise_probability(self, train_char_flat, test_char_flat):
         probability = 1
@@ -77,6 +84,7 @@ class SimpleModel():
             else:
                 probability *= penalty
         return probability
+
 
     def simple_model(self, training_matrices, test_matrices):
         res = ""
@@ -120,15 +128,19 @@ class HMM(SimpleModel):
     def convert(self, character_matrix):
         return SimpleModel.convert(character_matrix)
     
+
     def flatten_to_1D(self, sparse_matrix):
         return SimpleModel.flatten_to_1D(sparse_matrix)
     
+
     def probability_2(self, training_matrix, test_matrix):
         return super().probability_2(training_matrix, test_matrix)
     
+
     def probability_3(self, training_matrix, test_matrix):
         return super().probability_3(training_matrix, test_matrix)
     
+
     def pixel_wise_probability(self, train_char_flat, test_char_flat):
         return super().pixel_wise_probability(train_char_flat, test_char_flat)
 
@@ -254,7 +266,6 @@ class HMM(SimpleModel):
 
         return "".join(predicted_sequence)
     
-
 
     def viterbi(self, n):
         """
