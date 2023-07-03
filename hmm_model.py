@@ -22,7 +22,7 @@ class SimpleModel():
     def convert(matrix):
         converted_matrix = []
         for row in matrix:
-            converted_row = [1 if row[i]=="*" else 0 for i in range(len(row))]
+            converted_row = [1 if row[i] == "*" else 0 for i in range(len(row))]
             converted_matrix.append(converted_row)
         return converted_matrix
 
@@ -48,7 +48,7 @@ class SimpleModel():
         union, intersection = self.union_and_intersection(train, test)
         noisy_pixels = union - intersection
         diff = (noisy_pixels + 1) / (height * width)
-        return (1-diff)
+        return (1 - diff)
 
 
     def probability_2(self, training_matrix, test_matrix):

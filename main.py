@@ -74,14 +74,14 @@ if(__name__ == "__main__"):
         simple_accuracy = evaluation(testcase_answer[i], result) * 100
         hmm_accuracy = evaluation(testcase_answer[i], hmm_result) * 100
         fd_accuracy = evaluation(testcase_answer[i], fd_result) * 100
-        print(f"Accuracy for simple on case number {i} is: {round(simple_accuracy, 4)} %")
-        print(f"Accuracy for Forward HMM on case {i} is: {round(fd_accuracy, 3)} %")
-        print(f"Accuracy for Viterbi HMM on case {i} is: {round(hmm_accuracy, 3)} %")
+        print(f"Accuracy for simple on case number {i}: {round(simple_accuracy, 3)} %")
+        print(f"Accuracy for Forward HMM on case {i}: {round(fd_accuracy, 3)} %")
+        print(f"Accuracy for Viterbi HMM on case {i}: {round(hmm_accuracy, 3)} %")
         
         simple_mean_accuracy += simple_accuracy
         hmm_mean_accuracy += hmm_accuracy
         fd_mean_accuracy += fd_accuracy
     
-    print(f"Simple mean accuracy: {round(simple_mean_accuracy / n, 4)} %")
-    print(f"Forward HMM mean accuracy: {round(fd_mean_accuracy / n, 4)} %")
-    print(f"Viterbi HMM mean accuracy: {round(hmm_mean_accuracy / n, 4)} %")
+    print(f"Simple mean accuracy: {round(simple_mean_accuracy / n, 3)} %")
+    print(f"Forward HMM mean accuracy: {round(fd_mean_accuracy / n, 3)} %")
+    print(f"Viterbi HMM mean accuracy: {round(hmm_mean_accuracy / n, 3)} %")
